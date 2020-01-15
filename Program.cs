@@ -21,7 +21,7 @@ namespace Examples.System.Net.NetworkInformation.PingTest
             string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             byte[] buffer = Encoding.ASCII.GetBytes(data);
             int timeout = 120;
-            PingReply reply = pingSender.Send("192.168.1.2", timeout, buffer, options);
+            PingReply reply = pingSender.Send("192.168.1.3", timeout, buffer, options);
             if (reply.Status == IPStatus.Success)
             {
                 Console.WriteLine("Address: {0}", reply.Address.ToString());
