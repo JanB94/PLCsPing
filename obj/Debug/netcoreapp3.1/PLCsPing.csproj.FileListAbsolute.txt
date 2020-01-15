@@ -9,3 +9,14 @@ C:\Users\Jan\source\repos\PLCsPing\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.Ass
 C:\Users\Jan\source\repos\PLCsPing\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.AssemblyInfo.cs
 C:\Users\Jan\source\repos\PLCsPing\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.dll
 C:\Users\Jan\source\repos\PLCsPing\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.pdb
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.exe
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.deps.json
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.runtimeconfig.json
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.runtimeconfig.dev.json
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.dll
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\netcoreapp3.1\PLCsPing.pdb
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.csprojAssemblyReference.cache
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.AssemblyInfoInputs.cache
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.AssemblyInfo.cs
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.dll
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\netcoreapp3.1\PLCsPing.pdb
