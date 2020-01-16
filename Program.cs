@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -13,18 +12,21 @@ namespace PLCsPing
         static void Main(string[] args)
         {
 
-            List<string> ListaSterownikow = ListaPLC();
-            double dRespondTime;
-            string PLCIP = "0";
-            for (int i = 0; i < ListaSterownikow.Count; i++)
+            string SciezkaDoPlikuZapisu = @"..\..\PLCList.json";
+            string Data = System.IO.File.ReadAllText(SciezkaDoPlikuZapisu);
+            PlcList plcList = JsonConvert.DeserializeObject<PlcList>(Data);
+
+            string PLCIP;
+            PLCIP = plcList.Adres1;
+            double dRespondTime = 0;
+
+            Console.WriteLine("Pingowany sterownik: {0}", PLCIP);
+            for (int i = 0; i < 4; i++)
             {
-                PLCIP = ListaSterownikow[i];
-                Console.WriteLine("Pingowany sterownik: {0}", PLCIP);
                 dRespondTime = PingTimeAverage(PLCIP, 2);
                 Console.WriteLine("Odpowiedź z adresu: {0} wynosi {1}ms - {2}", PLCIP, dRespondTime, CommunicationStatus(dRespondTime));
                 System.Threading.Thread.Sleep(1000);
             }
-
             Console.WriteLine("Koniec pingowania: {0}", PLCIP);
             Console.ReadKey();
         }
@@ -63,16 +65,6 @@ namespace PLCsPing
             }
             return xStatusOfCommunication;
         }
-        public static List<string> ListaPLC()
-        {
-            List<string> ListaPLC = new List<string>();
-            ListaPLC.Add("192.168.100.80");
-            ListaPLC.Add("192.168.100.81");
-            ListaPLC.Add("192.168.100.82");
-            ListaPLC.Add("192.168.100.83");
-            return ListaPLC;
-        }
-
         public partial class PlcList
         {
             [JsonProperty("Adres1")]
@@ -81,6 +73,5 @@ namespace PLCsPing
             [JsonProperty("Adres2")]
             public string Adres2 { get; set; }
         }
-
     }
 }
