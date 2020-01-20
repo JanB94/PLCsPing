@@ -1,0 +1,30 @@
+﻿<Window x:Class="PLCsPing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLCsPing"
+        mc:Ignorable="d"
+        Title="Pingowanie sterowników PLC" Height="600" Width="446">
+    <Grid Margin="0,0,2,0" Height="550" VerticalAlignment="Bottom">
+        <DataGrid x:Name="PLCsDataGrid" HorizontalAlignment="Left" Height="360" Margin="50,40,0,0" VerticalAlignment="Top" Width="323" SelectionChanged="DataGrid_SelectionChanged">
+            <!-- Font Color / Style of Column headings -->
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Azure"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+            <!-- Column Header & Bindings -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Address IP" Width="100" Binding="{Binding AddresIP}"/>
+                <DataGridTextColumn Header="Response Time [ms]" Width="150" Binding="{Binding ResponseTime}"/>
+                <DataGridTextColumn Header="Status" Width="*" Binding="{Binding CommunicationStatus}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Window>

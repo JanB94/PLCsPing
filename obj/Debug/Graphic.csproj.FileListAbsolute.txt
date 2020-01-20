@@ -1,0 +1,14 @@
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.csprojAssemblyReference.cache
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\App.g.cs
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic_MarkupCompile.cache
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic_MarkupCompile.lref
+C:\Users\Jan\source\repos\WpfApp2\bin\Debug\Graphic.exe.config
+C:\Users\Jan\source\repos\WpfApp2\bin\Debug\Graphic.exe
+C:\Users\Jan\source\repos\WpfApp2\bin\Debug\Graphic.pdb
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.g.resources
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.Properties.Resources.resources
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.csproj.GenerateResource.cache
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.exe
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\Graphic.pdb
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\mainwindow.g.cs
+C:\Users\Jan\source\repos\WpfApp2\obj\Debug\mainwindow.baml

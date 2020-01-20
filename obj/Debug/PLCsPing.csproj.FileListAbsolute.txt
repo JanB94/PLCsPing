@@ -7,3 +7,12 @@ C:\VisualStudio\PLCsPing\PLCsPing\obj\Debug\PLCsPing.csprojAssemblyReference.cac
 C:\VisualStudio\PLCsPing\PLCsPing\bin\Debug\Newtonsoft.Json.dll
 C:\VisualStudio\PLCsPing\PLCsPing\bin\Debug\Newtonsoft.Json.xml
 C:\VisualStudio\PLCsPing\PLCsPing\obj\Debug\PLCsPing.csproj.CopyComplete
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing.exe.config
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing.exe
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing.pdb
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.csprojAssemblyReference.cache
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.csproj.CopyComplete
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.exe
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.pdb
