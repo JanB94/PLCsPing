@@ -37,7 +37,7 @@ namespace PLCsPing
                 DataToPlot DataToPlot = new DataToPlot();
                 sPLCIP = item;
                 DataToPlot.AddresIP = sPLCIP;
-                for (int i = 0; i<iLoopCount; i++)
+                for (int i = 0; i < iLoopCount; i++)
                 {
                     dRespondTime = PingTimeAverage(sPLCIP, 2);
                     DataToPlot.ResponseTime = dRespondTime;
@@ -47,24 +47,16 @@ namespace PLCsPing
                 }
                 PLCsDataGrid.Items.Add(DataToPlot);
             }
-            
+
         }
 
         public static List<string> PLCsList()
         {
             List<string> Address = new List<string>();
-            Address.Add("192.168.1.1");
-            Address.Add("192.168.1.2");
-            Address.Add("192.168.1.3");
-            Address.Add("192.168.1.4");
-            Address.Add("192.168.1.5");
-            Address.Add("192.168.1.6");
-            Address.Add("192.168.1.7");
-            Address.Add("192.168.1.8");
-            Address.Add("192.168.1.9");
-            Address.Add("192.168.1.10");
-            Address.Add("192.168.1.11");
-            Address.Add("192.168.1.12");
+            Address.Add("192.168.100.80");
+            Address.Add("192.168.100.81");
+            Address.Add("192.168.100.82");
+            Address.Add("192.168.100.83");
             return (Address);
         }
 

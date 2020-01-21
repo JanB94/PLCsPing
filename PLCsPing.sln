@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphic", "..\WpfApp2 — kopia\Graphic.csproj", "{48010615-4952-4FAE-962B-EEFF0AE27264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLCsPing", "PLCsPing.csproj", "{5370BA50-2726-4E13-A348-E72F7DD5EF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{48010615-4952-4FAE-962B-EEFF0AE27264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48010615-4952-4FAE-962B-EEFF0AE27264}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48010615-4952-4FAE-962B-EEFF0AE27264}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48010615-4952-4FAE-962B-EEFF0AE27264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5370BA50-2726-4E13-A348-E72F7DD5EF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5370BA50-2726-4E13-A348-E72F7DD5EF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5370BA50-2726-4E13-A348-E72F7DD5EF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5370BA50-2726-4E13-A348-E72F7DD5EF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D2C72555-7559-466C-9A05-C4B366BD334B}
+		SolutionGuid = {51F61A5E-878E-4FD3-9548-EB686ED62E80}
 	EndGlobalSection
 EndGlobal
