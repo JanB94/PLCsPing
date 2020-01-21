@@ -12,3 +12,17 @@ C:\VisualStudio\PLCsPing\PLCsPing2\obj\Debug\PLCsPing2.Properties.Resources.reso
 C:\VisualStudio\PLCsPing\PLCsPing2\obj\Debug\PLCsPing.csproj.GenerateResource.cache
 C:\VisualStudio\PLCsPing\PLCsPing2\obj\Debug\PLCsPing2.exe
 C:\VisualStudio\PLCsPing\PLCsPing2\obj\Debug\PLCsPing2.pdb
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.csprojAssemblyReference.cache
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\MainWindow.g.cs
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\App.g.cs
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2_MarkupCompile.cache
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2_MarkupCompile.lref
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2.exe
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2.pdb
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing2.exe.config
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing2.exe
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\PLCsPing2.pdb
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\MainWindow.baml
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2.g.resources
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing2.Properties.Resources.resources
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.csproj.GenerateResource.cache

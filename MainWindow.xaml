@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Pingowanie sterowników PLC" Height="600" Width="446">
     <Grid Margin="0,0,2,0" Height="550" VerticalAlignment="Bottom">
-        <DataGrid x:Name="PLCsDataGrid" HorizontalAlignment="Left" Height="360" Margin="50,40,0,0" VerticalAlignment="Top" Width="323" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid x:Name="PLCsDataGrid" HorizontalAlignment="Left" Height="360" Margin="50,40,0,0" VerticalAlignment="Top" Width="323" SelectionChanged="DataGrid_SelectionChanged" >
             <!-- Font Color / Style of Column headings -->
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -24,7 +24,21 @@
                 <DataGridTextColumn Header="Response Time [ms]" Width="150" Binding="{Binding ResponseTime}"/>
                 <DataGridTextColumn Header="Status" Width="*" Binding="{Binding CommunicationStatus}"/>
             </DataGrid.Columns>
-
         </DataGrid>
+        <Label Name="ClockTime" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,10,152,510" Height="30" Width="234" />
+        <ListView Name="lstPersons" Margin="82,424,26,34">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True">
+                    <GridView.Columns>
+                        <GridViewColumn Header="Adres IP"  Width="100"
+                            DisplayMemberBinding="{Binding AddresIP}" />
+                        <GridViewColumn Header="Response Time" Width="150"
+                            DisplayMemberBinding="{Binding ResponseTime}" />
+                        <GridViewColumn Header="Status" Width="60"
+                            DisplayMemberBinding="{Binding CommunicationStatus}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
