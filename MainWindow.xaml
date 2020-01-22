@@ -5,40 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLCsPing"
         mc:Ignorable="d"
-        Title="Pingowanie sterowników PLC" Height="600" Width="446">
-    <Grid Margin="0,0,2,0" Height="550" VerticalAlignment="Bottom">
-        <DataGrid x:Name="PLCsDataGrid" HorizontalAlignment="Left" Height="360" Margin="50,40,0,0" VerticalAlignment="Top" Width="323" SelectionChanged="DataGrid_SelectionChanged" >
-            <!-- Font Color / Style of Column headings -->
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="Azure"/>
-                    <Setter Property="FontWeight" Value="SemiBold"/>
-                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-            </DataGrid.Resources>
-            <!-- Column Header & Bindings -->
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Address IP" Width="100" Binding="{Binding AddresIP}"/>
-                <DataGridTextColumn Header="Response Time [ms]" Width="150" Binding="{Binding ResponseTime}"/>
-                <DataGridTextColumn Header="Status" Width="*" Binding="{Binding CommunicationStatus}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Name="ClockTime" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,10,152,510" Height="30" Width="234" />
-        <ListView Name="lstPersons" Margin="82,424,26,34">
+        Title="Pingowanie sterowników PLC" Height="340.5" Width="446">
+    <Grid Margin="0,19,2,9" >
+        <ListView Name="PLCList" Margin="10">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
                     <GridView.Columns>
-                        <GridViewColumn Header="Adres IP"  Width="100"
+                        <GridViewColumn Header="Adres IP"  Width="120"
                             DisplayMemberBinding="{Binding AddresIP}" />
-                        <GridViewColumn Header="Response Time" Width="150"
+                        <GridViewColumn  Header="Response Time" Width="150"
                             DisplayMemberBinding="{Binding ResponseTime}" />
-                        <GridViewColumn Header="Status" Width="60"
+                        <GridViewColumn Header="Status" Width="100"
                             DisplayMemberBinding="{Binding CommunicationStatus}" />
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Canvas>
+            <Label x:Name="ClockTime" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="96" Canvas.Left="10" Canvas.Top="-22" />
+        </Canvas>
     </Grid>
 </Window>

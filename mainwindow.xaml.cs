@@ -19,41 +19,34 @@ namespace PLCsPing
 {
     public partial class MainWindow : Window
     {
-        private List<DataToPlot> DataToSend = null;
+        private List<DataToPlot> DataToShow = null;
         public MainWindow()
         {
 
             InitializeComponent();
             Clock();
             asyncWorking();
-
-            InitBinding();
-
-        }
-        private void InitBinding()
-        {
-/*
-            DataToSend = new List<Person>();
-            DataToSend.Add(new Person(1, "Jan", "Kowalski", 25));
-            DataToSend.Add(new Person(2, "Adam", "Nowak", 24));
-            DataToSend.Add(new Person(3, "Agnieszka", "Kowalczyk", 23));
-
-            lstPersons.ItemsSource = m_oPersonList;*/
         }
 
-
-        public static List<string> PLCsList()
+        private static List<string> PLCsList()
         {
             List<string> Address = new List<string>();
             Address.Add("192.168.1.1");
-            Address.Add("192.168.100.81");
-            Address.Add("192.168.100.82");
-            Address.Add("192.168.100.83");
+            Address.Add("192.168.1.143");
+            Address.Add("192.168.1.250");
+            Address.Add("192.168.1.122");
+            Address.Add("192.168.1.185");
+            Address.Add("192.168.1.45");
+            Address.Add("192.168.1.66");
+            Address.Add("192.168.1.171");
+            Address.Add("192.168.1.115");
+            Address.Add("192.168.1.178");
+
             return (Address);
         }
         private async void asyncWorking()
         {
-            DataToSend = new List<DataToPlot>();
+            DataToShow = new List<DataToPlot>();
             bool xFirstLoop = false;
             while (true)
             {
@@ -61,34 +54,47 @@ namespace PLCsPing
                 List<string> slPLCList = PLCsList();
                 string sPLCIP;
                 double dRespondTime = 0;
-                int iThreadSleep = 50;
+                int iThreadSleep = 250;
                 int iLoopCount = 1;
                 bool xCommunicationStatus = false;
+                int TimeOut = 2000;
                
                 foreach (string item in slPLCList)
                 {
                     sPLCIP = item;
-                    for (int i = 0; i < iLoopCount; i++)
+                    await Task.Run(() =>
                     {
+                        dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
+                        xCommunicationStatus = CommunicationStatus(dRespondTime);
+                        if (xFirstLoop == false)
+                        {
+                            DataToShow.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
+                        }
+                    });
+                    System.Threading.Thread.Sleep(iThreadSleep);
+                    PLCList.ItemsSource = DataToShow;
+                    PLCList.Items.Refresh();
+                }
+                xFirstLoop = true;
+
+                if (xFirstLoop == true)
+                {
+                    int j = 0;
+                    foreach (string item in slPLCList)
+                    {
+                        sPLCIP = item;
                         await Task.Run(() =>
                         {
-                            dRespondTime = PingTimeAverage(sPLCIP, 2);
+                            dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
                             xCommunicationStatus = CommunicationStatus(dRespondTime);
-                            System.Threading.Thread.Sleep(iThreadSleep);
-                            if (xFirstLoop == false)
-                            {
-                                DataToSend.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
-                            }
+                            DataToShow[j] = new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus);
                         });
+                        System.Threading.Thread.Sleep(iThreadSleep);
+                        PLCList.ItemsSource = DataToShow;
+                        PLCList.Items.Refresh();
+                        j++;
                     }
-
                 }
-                if(xFirstLoop == false)
-                {
-                    lstPersons.ItemsSource = DataToSend;
-                    xFirstLoop = true;
-                }
-                // <!-- TERAZ TU ZROBIC ZEBY AKTUALIZOWAC LISTE --!>
             }
         }
 
@@ -99,22 +105,7 @@ namespace PLCsPing
             timer.Tick += timer_Tick;
             timer.Start();
         }
-        public class Person
-        {
-            public int PersonId { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public int Age { get; set; }
 
-            public Person(int nPersonId, string sFirstName, string sLastName,
-                int nAge)
-            {
-                PersonId = nPersonId;
-                FirstName = sFirstName;
-                LastName = sLastName;
-                Age = nAge;
-            }
-        }
         private class DataToPlot
         {
             public string AddresIP { get; set; }
@@ -129,15 +120,9 @@ namespace PLCsPing
             }
         }
 
-        void timer_Tick(object sender, EventArgs e)
-        {
-            ClockTime.Content = DateTime.Now.ToLongTimeString();
-        }
-
-        private static double PingTimeAverage(string host, int echoNum)
+        private static double PingTimeAverage(string host, int echoNum, int timeout)
         {
             long totalTime = 0;
-            int timeout = 120;
             Ping pingSender = new Ping();
 
             for (int i = 0; i < echoNum; i++)
@@ -167,6 +152,10 @@ namespace PLCsPing
                 xStatusOfCommunication = false;
             }
             return xStatusOfCommunication;
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            ClockTime.Content = DateTime.Now.ToLongTimeString();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
