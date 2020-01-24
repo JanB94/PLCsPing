@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLCsPing"
         mc:Ignorable="d"
-        Title="Pingowanie sterowników PLC" Height="340.5" Width="446">
+        Title="Pingowanie sterowników PLC" Height="994.057" Width="486.574">
     <Grid Margin="0,19,2,9" >
         <ListView Name="PLCList" Margin="10">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
                     <GridView.Columns>
-                        <GridViewColumn Header="Adres IP"  Width="120"
+                        <GridViewColumn Header="Adres IP"  Width="150"
                             DisplayMemberBinding="{Binding AddresIP}" />
-                        <GridViewColumn  Header="Response Time" Width="150"
+                        <GridViewColumn  Header="Response Time" Width="180"
                             DisplayMemberBinding="{Binding ResponseTime}" />
-                        <GridViewColumn Header="Status" Width="100"
+                        <GridViewColumn Header="Status" Width="120"
                             DisplayMemberBinding="{Binding CommunicationStatus}" />
                     </GridView.Columns>
                 </GridView>

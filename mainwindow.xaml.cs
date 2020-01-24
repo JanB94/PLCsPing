@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using Newtonsoft.Json;
 
 namespace PLCsPing
 {
@@ -27,21 +19,22 @@ namespace PLCsPing
             Clock();
             asyncWorking();
         }
+        public class PLCAdresIP
+        {
+            public string TimeOut;
+            public List<string> AdresIP;
+        }
 
-        private static List<string> PLCsList()
+        private static List<string> PLCsList(out int TimeOut)
         {
             List<string> Address = new List<string>();
-            Address.Add("192.168.1.1");
-            Address.Add("192.168.1.143");
-            Address.Add("192.168.1.250");
-            Address.Add("192.168.1.122");
-            Address.Add("192.168.1.185");
-            Address.Add("192.168.1.45");
-            Address.Add("192.168.1.66");
-            Address.Add("192.168.1.171");
-            Address.Add("192.168.1.115");
-            Address.Add("192.168.1.178");
 
+            string SciezkaDoPlikuZapisu = @"..\..\PLCList.json";
+            string Data = System.IO.File.ReadAllText(SciezkaDoPlikuZapisu);
+            var PLCAdresIP = JsonConvert.DeserializeObject<List<PLCAdresIP>>(Data);
+
+            Address = PLCAdresIP[0].AdresIP;
+            TimeOut = Int32.Parse(PLCAdresIP[0].TimeOut);
             return (Address);
         }
         private async void asyncWorking()
@@ -50,15 +43,14 @@ namespace PLCsPing
             bool xFirstLoop = false;
             while (true)
             {
-
-                List<string> slPLCList = PLCsList();
+                int TimeOut = 0;
+                List<string> slPLCList = PLCsList(out TimeOut);
                 string sPLCIP;
                 double dRespondTime = 0;
-                int iThreadSleep = 250;
-                int iLoopCount = 1;
+                int iThreadSleep = 100;
+                int iLoopCount = 2;
                 bool xCommunicationStatus = false;
-                int TimeOut = 2000;
-               
+
                 foreach (string item in slPLCList)
                 {
                     sPLCIP = item;
@@ -87,6 +79,11 @@ namespace PLCsPing
                         {
                             dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
                             xCommunicationStatus = CommunicationStatus(dRespondTime);
+                            System.Threading.Thread.Sleep(iThreadSleep);
+                            if (xFirstLoop == false)
+                            {
+                                DataToShow.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
+                            }
                             DataToShow[j] = new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus);
                         });
                         System.Threading.Thread.Sleep(iThreadSleep);
