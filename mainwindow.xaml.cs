@@ -19,88 +19,171 @@ namespace PLCsPing
             Clock();
             asyncWorking();
         }
-        public class PLCAdresIP
-        {
-            public string TimeOut;
-            public List<string> AdresIP;
-        }
 
-        private static List<string> PLCsList(out int TimeOut)
-        {
-            List<string> Address = new List<string>();
 
-            string SciezkaDoPlikuZapisu = @"..\..\PLCList.json";
-            string Data = System.IO.File.ReadAllText(SciezkaDoPlikuZapisu);
-            var PLCAdresIP = JsonConvert.DeserializeObject<List<PLCAdresIP>>(Data);
 
-            Address = PLCAdresIP[0].AdresIP;
-            TimeOut = Int32.Parse(PLCAdresIP[0].TimeOut);
-            return (Address);
-        }
+
         private async void asyncWorking()
         {
             DataToShow = new List<DataToPlot>();
+
+            string sPLCIP;
+            int TimeOut = 0;
+            int iThreadSleep = 0;
+            int iLoopCount = 0;
+            double dRespondTime = 0;
+            bool xCommunicationStatus = false;
             bool xFirstLoop = false;
-            while (true)
+
+            List<string> slPLCList = PLCsList(out TimeOut, out iThreadSleep, out iLoopCount);
+            if(iThreadSleep < 50)
             {
-                int TimeOut = 0;
-                List<string> slPLCList = PLCsList(out TimeOut);
-                string sPLCIP;
-                double dRespondTime = 0;
-                int iThreadSleep = 100;
-                int iLoopCount = 2;
-                bool xCommunicationStatus = false;
-
-                foreach (string item in slPLCList)
-                {
-                    sPLCIP = item;
-                    await Task.Run(() =>
-                    {
-                        dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
-                        xCommunicationStatus = CommunicationStatus(dRespondTime);
-                        if (xFirstLoop == false)
-                        {
-                            DataToShow.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
-                        }
-                    });
-                    System.Threading.Thread.Sleep(iThreadSleep);
-                    PLCList.ItemsSource = DataToShow;
-                    PLCList.Items.Refresh();
-                }
-                xFirstLoop = true;
-
-                if (xFirstLoop == true)
+                iThreadSleep = 50;
+            }
+            do
+            {
+                try
                 {
                     int j = 0;
                     foreach (string item in slPLCList)
                     {
                         sPLCIP = item;
-                        await Task.Run(() =>
+                        
+                        if (xFirstLoop == true)
                         {
-                            dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
-                            xCommunicationStatus = CommunicationStatus(dRespondTime);
-                            System.Threading.Thread.Sleep(iThreadSleep);
-                            if (xFirstLoop == false)
+                            await Task.Run(() =>
                             {
+                                dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
+                                xCommunicationStatus = CommunicationStatus(dRespondTime);
+                                DataToShow[j] = new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus);
+                                j++;
+                            });
+                            PLCList.ItemsSource = DataToShow;
+                            PLCList.Items.Refresh();
+                            System.Threading.Thread.Sleep(iThreadSleep);
+                        }
+                        if (xFirstLoop == false)
+                        {
+                            await Task.Run(() =>
+                            {
+                                dRespondTime = PingTimeAverage(sPLCIP, iLoopCount, TimeOut);
+                                xCommunicationStatus = CommunicationStatus(dRespondTime);
                                 DataToShow.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
-                            }
-                            DataToShow[j] = new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus);
-                        });
-                        System.Threading.Thread.Sleep(iThreadSleep);
+                            });
+
+                        }
+                    }
+                    if (xFirstLoop == false)
+                    {
                         PLCList.ItemsSource = DataToShow;
-                        PLCList.Items.Refresh();
-                        j++;
+                        xFirstLoop = true;
                     }
                 }
-            }
-        }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("A handled exception just occurred: \n" + ex.Message, "Exception number 0x0001", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+                    process.Kill();
+                }
+            } while (xFirstLoop == true);
 
+        }
+        private static List<string> PLCsList(out int iTimeOut, out int iThreadSleep, out int iLoopCount)
+        {
+            List<string> Address = new List<string>();
+            iTimeOut = 1;
+            iThreadSleep = 1;
+            iLoopCount = 1;
+
+            try
+            {
+                string SciezkaDoPlikuZapisu = @"PLCList.json";
+                string Data = System.IO.File.ReadAllText(SciezkaDoPlikuZapisu);
+                var PLCAdresIP = JsonConvert.DeserializeObject<List<PLCAdresIP>>(Data);
+                Address = PLCAdresIP[0].AdresIP;
+                iThreadSleep = Int32.Parse(PLCAdresIP[0].ThreadSleep);
+                iLoopCount = Int32.Parse(PLCAdresIP[0].LoopCount);
+                iTimeOut = Int32.Parse(PLCAdresIP[0].TimeOut);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A handled exception just occurred: \n" + ex.Message, "Exception number 0x0002", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+                process.Kill();
+            }
+            return (Address);
+        }
         private void Clock()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(100);
-            timer.Tick += timer_Tick;
-            timer.Start();
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(100);
+                timer.Tick += timer_Tick;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A handled exception just occurred: \n" + ex.Message, "Exception number 0x0003", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+                process.Kill();
+            }
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            ClockTime.Content = DateTime.Now.ToLongTimeString();
+        }
+
+        private static double PingTimeAverage(string host, int echoNum, int iTimeOut)
+        {
+            long totalTime = 0;
+            Ping pingSender = new Ping();
+            try
+            {
+                for (int i = 0; i < echoNum; i++)
+                {
+                    PingReply reply = pingSender.Send(host, iTimeOut);
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        totalTime += reply.RoundtripTime;
+                    }
+                    if (reply.Status == IPStatus.TimedOut)
+                    {
+                        totalTime = 9999 * echoNum;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A handled exception just occurred: \n" + ex.Message, "Exception number 0x0004", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+                process.Kill();
+            }
+            return totalTime / echoNum;
+        }
+
+        private static bool CommunicationStatus(double time)
+        {
+            bool xStatusOfCommunication = false;
+            try
+            {
+                if (time < 200)
+                {
+                    xStatusOfCommunication = true;
+                }
+                else
+                {
+                    xStatusOfCommunication = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A handled exception just occurred: \n" + ex.Message, "Exception number 0x0005", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+                process.Kill();
+            }
+            return xStatusOfCommunication;
         }
 
         private class DataToPlot
@@ -116,48 +199,13 @@ namespace PLCsPing
                 CommunicationStatus = nCommunicationStatus;
             }
         }
-
-        private static double PingTimeAverage(string host, int echoNum, int timeout)
+        private class PLCAdresIP
         {
-            long totalTime = 0;
-            Ping pingSender = new Ping();
-
-            for (int i = 0; i < echoNum; i++)
-            {
-                PingReply reply = pingSender.Send(host, timeout);
-                if (reply.Status == IPStatus.Success)
-                {
-                    totalTime += reply.RoundtripTime;
-                }
-                if (reply.Status == IPStatus.TimedOut)
-                {
-                    totalTime = 9999 * echoNum;
-                }
-            }
-            return totalTime / echoNum;
+            public string TimeOut;
+            public string ThreadSleep;
+            public string LoopCount;
+            public List<string> AdresIP;
         }
 
-        private static bool CommunicationStatus(double time)
-        {
-            bool xStatusOfCommunication;
-            if (time < 200)
-            {
-                xStatusOfCommunication = true;
-            }
-            else
-            {
-                xStatusOfCommunication = false;
-            }
-            return xStatusOfCommunication;
-        }
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            ClockTime.Content = DateTime.Now.ToLongTimeString();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

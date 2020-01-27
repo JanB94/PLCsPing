@@ -43,3 +43,6 @@ C:\VisualStudio\PLCsPing\obj\Debug\PLCsPing.csproj.GenerateResource.cache
 C:\VisualStudio\PLCsPing\obj\Debug\PLCsPing.csproj.CopyComplete
 C:\VisualStudio\PLCsPing\obj\Debug\PLCsPing.exe
 C:\VisualStudio\PLCsPing\obj\Debug\PLCsPing.pdb
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Jan\source\repos\PLCsPing\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jan\source\repos\PLCsPing\obj\Debug\PLCsPing.csproj.CopyComplete
