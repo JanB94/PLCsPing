@@ -3,7 +3,6 @@ using System.Net.NetworkInformation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using Newtonsoft.Json;
 
@@ -14,19 +13,13 @@ namespace PLCsPing
         private List<DataToPlot> DataToShow = null;
         public MainWindow()
         {
-
             InitializeComponent();
             Clock();
             asyncWorking();
         }
-
-
-
-
         private async void asyncWorking()
         {
             DataToShow = new List<DataToPlot>();
-
             string sPLCIP;
             int TimeOut = 0;
             int iThreadSleep = 0;
@@ -70,7 +63,6 @@ namespace PLCsPing
                                 xCommunicationStatus = CommunicationStatus(dRespondTime);
                                 DataToShow.Add(new DataToPlot(sPLCIP, dRespondTime, xCommunicationStatus));
                             });
-
                         }
                     }
                     if (xFirstLoop == false)
@@ -86,7 +78,6 @@ namespace PLCsPing
                     process.Kill();
                 }
             } while (xFirstLoop == true);
-
         }
         private static List<string> PLCsList(out int iTimeOut, out int iThreadSleep, out int iLoopCount)
         {
@@ -133,7 +124,6 @@ namespace PLCsPing
         {
             ClockTime.Content = DateTime.Now.ToLongTimeString();
         }
-
         private static double PingTimeAverage(string host, int echoNum, int iTimeOut)
         {
             long totalTime = 0;
@@ -162,7 +152,6 @@ namespace PLCsPing
             }
             return totalTime / echoNum;
         }
-
         private static bool CommunicationStatus(double time)
         {
             bool xStatusOfCommunication = false;
@@ -185,7 +174,6 @@ namespace PLCsPing
             }
             return xStatusOfCommunication;
         }
-
         private class DataToPlot
         {
             public string AddresIP { get; set; }
@@ -206,6 +194,5 @@ namespace PLCsPing
             public string LoopCount;
             public List<string> AdresIP;
         }
-
     }
 }
